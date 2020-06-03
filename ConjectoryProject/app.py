@@ -12,18 +12,20 @@ app = Flask(__name__)
 #Variables
 #htmlString = "www.whateverurlyouwant.com/A100706#A002275"
 #matchString = "A002275"
-sequence1 = "http://www.oeis.org/A100706"
-sequence2 = "http://www.oeis.org/A002275"
+#sequence1 = "A100706"
+#sequence2 = "A002275"
 
 # Make the WSGI interface available at the top level so wfastcgi can get it.
 wsgi_app = app.wsgi_app
 
 #Routing to Main Page
-@app.route('/')
-def SidMethod():
-    r = requests.get("http://oeis.org/A100706")
+@app.route('/<sequence1>/<sequence2>/')
+def SidMethod(sequence1, sequence2):
+    urlOne = "http://www.oeis.org/" + sequence1
+    urlTwo = "http://www.oeis.org/" + sequence2
+    #r = requests.get("http://oeis.org/A100706")
     #searchURLString(htmlString,matchString)
-    if (crossURLSequenceMatch(sequence1, sequence2)):
+    if (crossURLSequenceMatch(urlOne, urlTwo)):
         return "True"
     return "False"
 
